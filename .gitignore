@@ -8,3 +8,10 @@ wheels/
 
 # Virtual environments
 .venv
+.env
+email-agent/db/
+output/
+*.db
+*.sh
+*.jsonl
+*DS_Store
