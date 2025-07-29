@@ -134,7 +134,8 @@ async def generate_qa_from_llm(emails: List[Email]) -> List[dict]:
                 "golden_answer": data["answer"],
                 "realistic_score": data["realistic_score"],
                 "query_date": emails[idx].date,
-                "inbox_address": emails[idx].from_address,
+                "from_address": emails[idx].from_address,
+                "to_addresses": emails[idx].to_addresses,
             }
             for idx, data in enumerate(parsed_list)
     ]

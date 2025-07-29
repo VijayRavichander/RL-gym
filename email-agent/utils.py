@@ -29,9 +29,8 @@ You're an helpful email agent. You need to answer questions and doubts with the 
 * Make at least 1 tool calls before giving your final answer and atmost of 2 tool calls.
 
 You have access to the following tools:
-- search_emails(keywords: List[str]) -> List[str]: Searches the email database based on keywords, inbox, sender, recipient, and date range.
-- read_email(email_id: str): Retrieves a single email by its message_id from the database.
-
+- search_emails(inbox: str, keywords: List[str]) -> List[str]: Searches the email database based on keywords, inbox, sender, recipient, and date range.
+- read_email(message_id: str): Retrieves a single email by its message_id from the database.
 
 # Tool Usage Tips: 
 * The list of keywords need to be smart. The search tool will look for the all the keywords in the list and return the emails that all the kewyords. 
@@ -43,11 +42,11 @@ You have access to the following tools:
 {
     "name": "search_emails",
     "args": {
+        "inbox": "john@example.com",
         "keywords": ["Meeting on Friday"]
     }
 }
 </tool>
-
 
 * In each turn, you should respond in the following format:
 
@@ -66,6 +65,7 @@ When you are done, give your final answer in the following format:
 [your final answer here]
 </answer>
 """
+
 
 
 REWARD_MODEL_SYSTEM_PROMPT = """

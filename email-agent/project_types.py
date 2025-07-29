@@ -13,9 +13,15 @@ class Email(BaseModel):
     body: Optional[str] = None
     file_name: Optional[str] = None
 
+class Input(BaseModel):
+    question: str
+    inbox_address: str
 
-class RollOut(BaseModel):
+class EvaluationRollOut(BaseModel):
     question: str
     agent_answer: str
     golden_answer: str
-    
+
+class SearchResult(BaseModel):
+    message_id: str
+    snippet: str

@@ -1,14 +1,12 @@
 import sqlite3
 import logging
 from typing import List, Optional
-from dataclasses import dataclass
-
+from pydantic import BaseModel
+import json
 from email_db import DEFAULT_DB_PATH
-from project_types import Email
-
+from project_types import Email, SearchResult
 
 conn = None
-
 
 def get_conn():
     global conn
@@ -17,13 +15,6 @@ def get_conn():
             f"file:{DEFAULT_DB_PATH}?mode=ro", uri=True, check_same_thread=False
         )
     return conn
-
-
-@dataclass
-class SearchResult:
-    message_id: str
-    snippet: str
-
 
 def search_emails(
     inbox: str,
@@ -220,3 +211,9 @@ def read_email(message_id: str) -> Optional[Email]:
     )
 
     return email_obj
+
+def read_email_tool(message_id: str) -> Optional[str]:
+    return json.dumps(read_email(message_id).model_dump())
+
+def search_emails_tool(inbox: str, keywords: List[str]) -> List[str]:
+    return json.dumps([result.model_dump() for result in search_emails(inbox, keywords)])

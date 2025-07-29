@@ -10,8 +10,8 @@ wheels/
 .venv
 .env
 email-agent/db/
-output/
+output/*
 *.db
 *.sh
 *.jsonl
-*DS_Store
+*.DS_Store
